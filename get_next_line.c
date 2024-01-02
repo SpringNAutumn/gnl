@@ -1,23 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
+/*   Updated: 2024/01/02 18:43:40 by gmarin-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-// Nuestra funcion get next line tiene que ir iterando para mostrar por pantalla el contenido del file descriptor. 
-// lo que hacemos será almacenar en la variable estática en caso de que el boofer sea menor a la longitud de la palabra.
-
+// Funcion principal del get_next_line. pasamos el feed del archivo y almacenara en el buffer el bu
 char *get_next_line(int fd)
 {
 	static char* suboofer;
 	char* boofer;
+	int bytesread;
 
-	// 	Almacenamos en buffer lo leido del feed hasta buffersize.
-									// El buffersize +1 es para almacenar el caracter de escape. 
-	boofer = malloc(sizeof(char*) * (BUFFER_SIZE + 1));
-	int bytes = read(fd, boofer, BUFFER_SIZE);
-	boofer[bytes] = '\0';
-	// En nuestro buffer tenemos todo lo leido. en el boofer podremos separar palabras 
-		// En el buffer lo que tenemos que hacer es separar las palabras cuando se encuentre el salto de linea?
 
-	// tenemos que hacer que si encuentra un \n que salte de llamada a la funcion.
+
+	bytesread = 0;
+
+	boofer = malloc(BUFFER_SIZE + 1);
+	if (!boofer)
+		return NULL;
+		
+	while (!strchr(boofer, '\n'))
+	{
+		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
+			break;
+		suboofer = strjoin(suboofer, boofer);
+		
+		// seek and return lastline. 
+		
+	}
+		
+
 	return (boofer);
 }
 
+// los pasos del get_next_line serian: alocar memoria a buffer, leer buffer, añadir a variable estatica mientras no encuentre salto de linea. en cuanto h
 
+// El problema es que alomejor hemos metido en suboofer un salto de linea. por lo que tendremos 
