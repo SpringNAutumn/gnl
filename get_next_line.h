@@ -16,5 +16,7 @@ char *ft_strchr(const char *s, int c);
 char *retrieve_line(char *string);
 char *liberasao(char **aliberar);
 char *limpiamos (char *string);
+char *ft_strdup(char const *s1);
+char *get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/01/03 19:56:06 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:02:24 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char *ft_strchr(const char *s, int c)
 
 char *ft_strjoin(char *s1, char *s2)
 {
-
 	  if (!s1 || !s2)
         return NULL;
 	int o;
@@ -96,4 +95,23 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	s2[o] = '\0';
 	return (s2);
 	free (s2);
+}
+
+// Todo implement strdup.
+
+char *ft_strdup(char const *s1)
+{
+	int i = 0;
+	char *s2 = malloc(ft_strlen(s1) + 1 * sizeof(char));
+	// si la alocacion de memoria falla. retornamos null.
+	if (!s2)
+		return NULL;
+
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[ft_strlen(s1)] = '\0';
+	return s2;
 }

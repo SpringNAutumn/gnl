@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/01/03 20:02:05 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:18:47 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ char *get_next_line(int fd)
 
 	bytesread = 0;
 	boofer = malloc(BUFFER_SIZE + 1);
+	boofer[BUFFER_SIZE] = '\0';
 	if (!boofer)
 		return NULL;
-		
+	suboofer = ft_strdup("");
 	while (!ft_strchr(boofer, '\n'))
 	{
 		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
@@ -35,20 +36,21 @@ char *get_next_line(int fd)
 	return devolusao;
 }
 
-char *limpiamos (char *string)
+char *limpiamos(char *string)
 {
 	char *devolucion;
 	int i = 0;
 
-	while ( string[i] != '\n')
+	while (string[i] != '\n' || string[i] != '\0')
 		i++;
 	if (ft_strlen(&string[i]) < 2)
 		devolucion = liberasao(&string);
 	else
-		devolucion  = ft_substr(string, (ft_strchr(string, '\n') - &string), ft_strlen(string));
+		devolucion  = ft_substr(string, (ft_strchr(string, '\n') - string), ft_strlen(string));
 	return devolucion;
 }
 
+// Todo poner un 
 char *retrieve_line(char *string)
 {	
 	char *posicion = ft_strchr(string, '\n');
@@ -57,7 +59,7 @@ char *retrieve_line(char *string)
 	if (posicion != NULL)
 		a_devolver = malloc((posicion - string) + 1);
 	else
-		return NULL;
+		return (string);
 	int i = 0;
 	while(i < (posicion - string))
 	{
@@ -74,5 +76,3 @@ char *liberasao(char **aliberar)
 	*aliberar = NULL;
 	return NULL;
 }
-
-
