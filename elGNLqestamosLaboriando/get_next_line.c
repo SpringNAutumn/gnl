@@ -1,67 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/13 15:53:51 by gmarin-m          #+#    #+#             */
+/*   Updated: 2024/03/13 17:26:33 by gmarin-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-// Nuestra funcion get next line tiene que ir iterando para mostrar por pantalla el contenido del file descriptor. 
-// lo que hacemos será almacenar en la variable estática en caso de que el boofer sea menor a la longitud de la palabra.
-
-
-/*
-	Esto es el getnextline, es una introducción a las variables estáticas en C.
-	una variable estática es una variable que retiene su valor entre llamadas a la funcion.
-
-		Las variables son inicializadas solo una vez. 
-		El alcance de la variable es dentro de la funcion donde está definida. 
-		pero retienen su valor entre llamadas a la funcion. 
-
-*/
-
-// le pasamos el fd del archivo que queremos leer. 
-// si le pasamos un buffersize de 5. primero leemos a boofer, despues a suboofer. 
 char *get_next_line(int fd)
 {
+	
+	// La variable estatica que mantendra valor entre llamada a la función. 
+	// se meterá en la variable estáica pero cuando lea salto de linea se borra la variable estática.
+	
 	static char* suboofer;
 	char* boofer;
 
-	// 	Almacenamos en buffer lo leido del feed hasta buffersize.
-	//  El buffersize +1 es para almacenar el caracter de escape.
+	// almacenamos el primer boffer dando buffersize.
 	boofer = malloc(sizeof(char*) * (BUFFER_SIZE + 1));
 
-	// leemos todo el buffer hasta buffersize el cual se almacenará en boofer, ahora tendremos que leer el boofer
+	// numero bytes leidos. 		
+	// leemos todo el buffer hasta buffersize el cual se almacenará en boofer, ahora tendremos que leer el boofer.
 	int bytes = read(fd, boofer, BUFFER_SIZE);
+
 	boofer[bytes] = '\0';
 
+	/*
+		Mientras no se encuentre un salto de linea en el buffer, 
+		metemos en la variable estática el buffer.		
+	*/
 
-	while (boofer != '\0')
+// variable pibote para liberar memoria....
+	while (ft_strchr(boofer, '\n') == NULL)
 	{
-		// Aqui en teoria estamos allocando a la string suboofer un tamano de malloc, con tamano del boofer - la primera.
-		// guardamos en una variable el resultado de strchr. no podemos asignar el resultado directamente posiblemente al ser
-		// una variable estatica.
-		char newline* = strchr(boofer, '\n');
-		if (!newline)
-			return NULL;
-		int index = newline - boofer;
-		// al boofer hay que restarle lo retante del boofer, eso es el boofer - newline 
-		suboofer = malloc(sizeof(char*) * (sizeof(boofer) - newline));
-	// ahora ya tenemos la memoria de suboofer 
-	}
-	// comprobamos si el boofer tiene un \n. Si el boofer tiene un \n lo que hacemos es iterar.
+		char* temp = suboofer;
 		
-			suboofer = malloc (sizeof(char*) * (boofer + 1));
+		// concatenamos, la memoria en teoría se libera. 
+		suboofer = ft_strjoin(suboofer, boofer);
+		// ahora ya tenemos la memoria de suboofer y eliminamos temp.
+		free(temp);
 
-	return (boofer);
+	if (ft_strchr(boofer, '\n') == '\n')
+		break;
+	}
+	return (suboofer);
 }
-
-// aqui tenemods que meter el boofer para que sea devuelta solo una linea y el resultado almacenarlo en el suboofer.
-void read_line()
-{
-
-
-
-}
-
-
-
-
-
-
-
-
