@@ -6,18 +6,12 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/13 17:27:02 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 14:01:32 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
-// Aqui programaremos las funciones auxiliares que nos van a ayudar como el strchr.
-// the strchr() function locates the first occurrence of c converted to a char in the string pointed to by s.
-// nos flatan algunas funciones utiles para el get next line.
-
-// el strchr devuelve puntero a la primera iteracion del caracter. 
 char *ft_strchr(const char *s, int c)
 {
 	if (!s)
@@ -44,15 +38,17 @@ int ft_strlen(char *s1)
 	return (i);
 }
 
-
-// Necesitamos esta funcion para concatenar las dos cadenas. 
-// En caso de que no se encuentre el salto de linea, concatenaremos y asignaremos a la variable estática.
-// creo que no tendremos que asignar espacio en memoria.
 char *ft_strjoin(char *s1, char *s2)
 {
 	int i = 0;
 	int o = 0;
-	char *s3 = malloc (strlen(s1) + strlen(s2) + 1);
+	char* s3;
+	
+	if (!s1 || !s2)
+        return (NULL);
+	
+	if (!(s3 = malloc(sizeof(*s3) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+        return (NULL);
 
 	while (s1[i])
 	{
@@ -62,12 +58,43 @@ char *ft_strjoin(char *s1, char *s2)
 
 	while (s2[o])
 	{
-		s3[i] = s2[o];
-		i++;
+		s3[i+o] = s2[o];
 		o++;
 	}
 
-	s3[i] = '\0';
+	s3[i + o] = '\0';
 	return (s3);
 }
 
+// funcion de copiar hasta x caracteres
+
+char* ft_strncpy(char *dst, const char *src, size_t len)
+{
+	size_t i;
+	
+	i = 0;
+	if (!dst || !src)
+		return NULL;
+			
+	while (i < len && src[i] != '\0')
+		dst[i] = src[i];
+
+return (dst);
+}
+
+// Strncat concatenar. 
+
+char * ft_strncat (char *dst, const char *src, size_t n)
+{
+	size_t dst_len = ft_strlen (dst);
+	size_t i;
+
+	while(i < n && src[i] != '\0')
+	{
+		dst [dst_len + i] = src [i];
+		i ++;
+	}
+	
+	dst [dst_len + i] = '\0';
+	return (dst);
+}
