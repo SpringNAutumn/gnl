@@ -1,3 +1,6 @@
-el get next line lo que hará sera leer caracteres desde el file descriptor especificado y los almacenará en el buffer hasta que encuentre un salto de linea al final del archivo
-acto seguido copia los caracteres. 
-La funcion lleva a cabo el proceso cada vez que se la llama. 
+tenemos tres funciones.
+
+la funcion principal que va llamando a la variable estática.
+vamos recorriendo boofersize a boofersize hasta que se encuentra un salto de linea,
+cuando se encuentra un salto de linea. llamamos a retrieve line que lo que hace es recortar 
+se devuelve la linea recortada, y se llama a lipiamos que lo que debe de hacer es devolver la variable estática limpia. 

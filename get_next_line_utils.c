@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/01/23 19:02:24 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:32:55 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		}
 	}
 	s2[o] = '\0';
-	return (s2);
 	free (s2);
+	return (s2);
 }
 
 // Todo implement strdup.
-
 char *ft_strdup(char const *s1)
 {
 	int i = 0;

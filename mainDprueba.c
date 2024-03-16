@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:31:21 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/01/23 19:13:29 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:16:57 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@ int main (void)
 {
 	char *escribir;
 	int fd = open("oruebafile.txt", O_RDONLY);
-
 	escribir = get_next_line(fd);
-	printf("La cadena leida por el feed es: %s", escribir);
-
-	free (escribir);
-
-	/*escribir = get_next_line(fd);
-	printf("La cadena leida por el feed es: %s", escribir);
+	char *escribir1 = get_next_line(fd);
+	char *escribir2 = get_next_line(fd);
+	char *escribir3 = get_next_line(fd);
+	char *escribir4 = get_next_line(fd);
+	char *escribir5 = get_next_line(fd);
+	int i = 0;
 	
+	printf("La cadena leida por el feed es: %s \n", escribir);
+	printf("La cadena leida por el feed es: %s\n", escribir1);
+	printf("La cadena leida por el feed es: %s\n", escribir2);
+	printf("La cadena leida por el feed es: %s\n", escribir3);
+	printf("La cadena leida por el feed es: %s\n", escribir4);
+	printf("La cadena leida por el feed es: %s\n", escribir5);
 	free (escribir);
-	
-	escribir = get_next_line(fd);
-	printf("La cadena leida por el feed es: %s", escribir);*/
 	
 	return (0);
 }

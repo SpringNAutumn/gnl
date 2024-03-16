@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/16 14:01:32 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:29:42 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,13 @@ char * ft_strncat (char *dst, const char *src, size_t n)
 	dst [dst_len + i] = '\0';
 	return (dst);
 }
+/*
+// implementacion de substr para liberacion.
+char * ft_substr(char *s1, char *s2, int n)
+{
+		
+
+	
+	
+}
+*/

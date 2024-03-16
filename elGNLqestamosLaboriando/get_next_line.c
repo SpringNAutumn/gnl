@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:53:51 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/16 13:56:33 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:33:31 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,25 @@ char *get_next_line(int fd)
 	char* boofer;
 
 	boofer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-
-	// comprobar el caso de que no se lean el fichero.
+    if (!boofer)
+        return NULL;
+	
 	int bytes = read(fd, boofer, BUFFER_SIZE);
-
-
+	if (bytes == -1)
+		return ("errr error");
 	boofer[bytes] = '\0';
-
+	
 	while (ft_strchr(boofer, '\n') == NULL)
-	{
-		char* temp = suboofer;
-		suboofer = ft_strjoin(suboofer, boofer);
-		free(temp);
-
-	// bytes?
-		read(fd, boofer, BUFFER_SIZE);
-		boofer[bytes] = '\0';
+	{		
+		// char* temp = suboofer;
+		//suboofer = ft_strjoin(suboofer, boofer);
+		// free(temp);
+		bytes = read(fd, boofer, BUFFER_SIZE);
 	}
-
+/*
 	char* fino;
-	// comparar con puntero.
-	if(fino = ft_strchr(boofer, '\n'))
+	
+	if (fino = ft_strchr(boofer, '\n'))
 	{
 		int corta = ft_strlen(fino);
 		int ameter = ft_strlen(boofer) - corta;
@@ -52,5 +50,9 @@ char *get_next_line(int fd)
 		free (temp);
 		free (auxo);
 	}
+	*/
+
+	return (boofer);
+	free (boofer);
 	return (suboofer);
 }

@@ -28,8 +28,6 @@ FLAGS = -Wall -Wextra -Werror
 REMOVE = rm -f
 CC = cc
 
-
-
 all: $(NAME)
 
 $(NAME): $(OBJECTS)

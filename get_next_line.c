@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/01/23 19:18:47 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:22:50 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,29 @@
 char *get_next_line(int fd)
 {
 	static char* suboofer;
+	
 	char* boofer;
 	int bytesread;
 
 	bytesread = 0;
 	boofer = malloc(BUFFER_SIZE + 1);
 	boofer[BUFFER_SIZE] = '\0';
+	
 	if (!boofer)
 		return NULL;
-	suboofer = ft_strdup("");
+
+	if (suboofer == NULL)
+		suboofer = ft_strdup("");
+		
 	while (!ft_strchr(boofer, '\n'))
 	{
 		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
 			break;
-		// tener cuidado porque suboofer va a acabar con \0
+		boofer[bytesread] ='\0';
+		// vamos guardando en suboofer.
 		suboofer = ft_strjoin(suboofer, boofer);
 	}
+
 	char* devolusao = retrieve_line(suboofer);
 	suboofer = limpiamos(suboofer);
 	return devolusao;
@@ -41,7 +48,7 @@ char *limpiamos(char *string)
 	char *devolucion;
 	int i = 0;
 
-	while (string[i] != '\n' || string[i] != '\0')
+	while (string[i] != '\n' && string[i] != '\0')
 		i++;
 	if (ft_strlen(&string[i]) < 2)
 		devolucion = liberasao(&string);
@@ -49,8 +56,27 @@ char *limpiamos(char *string)
 		devolucion  = ft_substr(string, (ft_strchr(string, '\n') - string), ft_strlen(string));
 	return devolucion;
 }
+/*
+char *limpiamos(char *string)
+{
+    char *devolucion;
+    int i = 0;
 
-// Todo poner un 
+	// recorremos suboofer. 
+    while (string[i] != '\n' && string[i] != '\0')
+        i++;
+		
+    if (string[i] == '\0') {
+        devolucion = ft_strdup("");
+        free(string);
+    } else {
+        devolucion = &string[i + 1];
+    }
+    return devolucion;
+}
+
+*/
+
 char *retrieve_line(char *string)
 {	
 	char *posicion = ft_strchr(string, '\n');
