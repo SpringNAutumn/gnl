@@ -1,6 +1,31 @@
-tenemos tres funciones.
+puntero de un puntero:
 
-la funcion principal que va llamando a la variable estática.
-vamos recorriendo boofersize a boofersize hasta que se encuentra un salto de linea,
-cuando se encuentra un salto de linea. llamamos a retrieve line que lo que hace es recortar 
-se devuelve la linea recortada, y se llama a lipiamos que lo que debe de hacer es devolver la variable estática limpia. 
+--- se declara un puntero qu apuntará a otro puntero
+
+
+
+char *liberasao(char **aliberar)
+{
+	free(*aliberar);
+	*aliberar = NULL;
+	return NULL;
+}
+
+
+
+--- Si tenemos una string, apntamos un puntero a una cadena y luego liberamos de memoria la cadena obiamente apuntara a un espacio vacio. 
+
+
+por lo que tenemos que duplicar la cadena desde el punto donde la queremos antes de liberarla. 
+
+    if (string[i] == '\0') {
+        devolucion = ft_strdup("");
+    } else {
+        devolucion = &string[i + 1];
+    }
+
+	a.out(11810,0x10d042dc0) malloc: *** error for object 0x6575710a616c6f68: pointer being freed was not allocated
+	a.out(11810,0x10d042dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+	zsh: abort      ./a.out
+
+-- En algun momento estamos liberando memoria del suboofer no alocada. 

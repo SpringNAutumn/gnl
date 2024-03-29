@@ -6,12 +6,14 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/16 18:32:55 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:19:09 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+
+// implemented functions handle the dynamic memory allocation if there is any. 
 char *ft_strchr(const char *s, int c)
 {
 	if (!s)
@@ -67,7 +69,7 @@ size_t ft_strlen(char *s)
 	}
 	return i;
 }
-
+// El substr se puede utilizar en vez del strndup
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	int		i;
@@ -112,5 +114,25 @@ char *ft_strdup(char const *s1)
 		i++;
 	}
 	s2[ft_strlen(s1)] = '\0';
+	return s2;
+}
+
+// copies at most n characters of the string s1 always null terminating
+char *ft_strndup(char const *s1, size_t n)
+{
+	int i = 0;
+
+	char *s2 = malloc(n + 1 * sizeof(char));
+	
+	// si la alocacion de memoria falla. retornamos null.
+	if (!s2)
+		return NULL;
+
+	while (i < n && s1)
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[n] = '\0';
 	return s2;
 }

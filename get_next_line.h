@@ -2,7 +2,7 @@
 #define GET_NEXT_LINE_H
 
 // definimos el buffer size. 
-#define BUFFER_SIZE 9
+#define BUFFER_SIZE 3
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -18,5 +18,6 @@ char *liberasao(char **aliberar);
 char *limpiamos (char *string);
 char *ft_strdup(char const *s1);
 char *get_next_line(int fd);
+char *ft_strndup(char const *s1, size_t n);
 
 #endif

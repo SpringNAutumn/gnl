@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:31:21 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/16 18:16:57 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:24:22 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int main (void)
 	printf("La cadena leida por el feed es: %s \n", escribir);
 	printf("La cadena leida por el feed es: %s\n", escribir1);
 	printf("La cadena leida por el feed es: %s\n", escribir2);
-	printf("La cadena leida por el feed es: %s\n", escribir3);
-	printf("La cadena leida por el feed es: %s\n", escribir4);
-	printf("La cadena leida por el feed es: %s\n", escribir5);
-	free (escribir);
+	//printf("La cadena leida por el feed es: %s\n", escribir3);
+	//printf("La cadena leida por el feed es: %s\n", escribir4);
+	//printf("La cadena leida por el feed es: %s\n", escribir5);
+	
 	
 	return (0);
 }
