@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/29 19:10:21 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:25:47 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char *get_next_line(int fd)
 		// hadles the freeing of the allocatd boofer memory.
 		suboofer = ft_strjoin(suboofer, boofer);
 	}
-	
 	char* devolusao = retrieve_line(suboofer);
 	suboofer = limpiamos(suboofer);
 	return devolusao;
@@ -45,10 +44,12 @@ char *limpiamos(char *string)
     char *devo;
     int i = 0;
     
-	// recorremos suboofer.
+	 if (string[i] == '\0') {
+        devo = ft_strdup("");
+		
     while (string[i] != '\n' && string[i] != '\0')
         i++;
-	
+	// should we change this to a free function?
     if (string[i] == '\0') {
         devo = ft_strdup("");
     } else {

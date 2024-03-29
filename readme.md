@@ -13,8 +13,6 @@ char *liberasao(char **aliberar)
 	return NULL;
 }
 
-
-
 // al ser una variable estatica se tiene que liberar la memoria manualmente
 
 
