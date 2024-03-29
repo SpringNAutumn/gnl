@@ -6,14 +6,12 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/03/29 18:15:50 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:10:21 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
  
-
- //
 char *get_next_line(int fd)
 {
 	static char	*suboofer;
@@ -21,11 +19,10 @@ char *get_next_line(int fd)
 	int bytesread;
 
 	boofer = malloc(BUFFER_SIZE + 1);
-	boofer[BUFFER_SIZE] = '\0';
-	
 	if (!boofer)
 		return NULL;
 
+	boofer[BUFFER_SIZE] = '\0';
 	if (suboofer == NULL)
 		suboofer = ft_strdup("");
 		
@@ -34,6 +31,7 @@ char *get_next_line(int fd)
 		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
 			break;
 		boofer[bytesread] ='\0';
+		// hadles the freeing of the allocatd boofer memory.
 		suboofer = ft_strjoin(suboofer, boofer);
 	}
 	
@@ -44,20 +42,21 @@ char *get_next_line(int fd)
 
 char *limpiamos(char *string)
 {
-    char *devolucion;
+    char *devo;
     int i = 0;
-
+    
 	// recorremos suboofer.
     while (string[i] != '\n' && string[i] != '\0')
         i++;
 	
     if (string[i] == '\0') {
-        devolucion = ft_strdup("");
+        devo = ft_strdup("");
     } else {
-        devolucion = ft_strndup(string + i + 1 , ft_strlen(string) - (i + 1));
+        devo = ft_strndup(string + i + 1 , ft_strlen(string) - (i + 1));
     }
-	string = liberasao (string);
-    return devolucion;
+// no estamos liberando la memoria de la variable estática?
+	liberasao(&string);
+    return devo;
 }
 
 char *retrieve_line(char *string)
@@ -78,15 +77,17 @@ char *retrieve_line(char *string)
 		a_devolver[i] = string[i];
 		i ++;
 	}
+	// a_devolver se libera dejando result con memoria alocada dinamicamente sin liberar.
 	a_devolver[i] = '\0';
-
-	
-	return a_devolver;
+	char *result = ft_strdup(a_devolver);
+	free(a_devolver);
+	return result;
 }
-// Aqui liberamos la funcion estatica, pero guardamos 
+// we need to pass the pointer itsel, the parameter will be a pointer of variable that points 
+// to the pointer passed.
 char *liberasao(char **aliberar)
 {
 	free(*aliberar);
 	*aliberar = NULL;
-	return NULL;
+	return aliberar;
 }

@@ -2,6 +2,8 @@ puntero de un puntero:
 
 --- se declara un puntero qu apuntará a otro puntero
 
+se declara la variable y se asigna pero como es un puntero doble la variable o la direccion
+de memoria se asigna al "segundo puntero"
 
 
 char *liberasao(char **aliberar)
@@ -11,6 +13,9 @@ char *liberasao(char **aliberar)
 	return NULL;
 }
 
+
+
+// al ser una variable estatica se tiene que liberar la memoria manualmente
 
 
 --- Si tenemos una string, apntamos un puntero a una cadena y luego liberamos de memoria la cadena obiamente apuntara a un espacio vacio. 
