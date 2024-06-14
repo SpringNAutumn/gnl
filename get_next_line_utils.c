@@ -115,6 +115,7 @@ char *ft_strdup(char *s1)
 		i++;
 	}
 	s2[ft_strlen(s1)] = '\0';
+	
 	return s2;
 }
 

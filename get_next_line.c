@@ -28,13 +28,13 @@ char *get_next_line(int fd)
 		return NULL;
 
 	int i = -1;
-	// rellenamos el boofer de escapes
+	// rellenamos el boofer con \0
 	while (++i <= BUFFER_SIZE)
 		boofer[i] = '\0';
 
 	if (suboofer == NULL)
 		suboofer = ft_strdup("");
-		
+
 	while (!ft_strchr(suboofer, '\n'))
 	{
 		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
@@ -44,14 +44,17 @@ char *get_next_line(int fd)
 				break ;
 			return (NULL);
 		}
-		boofer[bytesread] ='\0';
+		boofer[bytesread] = '\0';
 		tmp = suboofer;
 		suboofer = ft_strjoin(suboofer, boofer);
 		free (tmp);
 	}
+	
 	devolusao = retrieve_line(suboofer);
-	char *temp = limpiamos(suboofer);
 
+	
+	char *temp = limpiamos(suboofer);
+	//free (suboofer);
 	suboofer = temp;
 	if (*devolusao == '\0')
 		return (NULL);
@@ -61,6 +64,8 @@ char *get_next_line(int fd)
 /*
 	Liberacion: la string a liberar se reccorre hasta la ultima posición, lo liberado será la longitud de la cadena. 
 */
+
+// perdemos 1 byte limpiamos debe de estar mal.
 char *limpiamos(char *string)
 {
 	char	*devo;
@@ -99,13 +104,9 @@ char *retrieve_line(char *string)
 		i ++;
 	}
 	a_devolver[i] = '\0';
-	char *result = ft_strdup(a_devolver);
-
-	free (a_devolver);
-	return (result);
+	return (a_devolver);
 }
 
-// liberasao libera memoria alocada a strings o cadenas de caracteres.
 char* liberasao(char **aliberar)
 {
 	free(*aliberar);

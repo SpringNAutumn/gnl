@@ -27,8 +27,8 @@ int main (void)
 		free(escribir);
 		escribir = get_next_line(fd);
 	}
-	if (escribir)
-		free (escribir);
+
+	free (escribir);
 	close(fd);
 	return (0);
 }
