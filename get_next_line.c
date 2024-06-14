@@ -11,55 +11,75 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
- 
+
+// Still reachable memory is memory that is 
+//assigned and not freed although is not cosidered a memory leak since it is still accessible
+
 char *get_next_line(int fd)
 {
 	static char	*suboofer;
-	char	*boofer;
-	int bytesread;
+	char		*boofer;
+	int 		bytesread;
+	char		*devolusao;
+	char		*tmp;
 
 	boofer = malloc(BUFFER_SIZE + 1);
 	if (!boofer)
 		return NULL;
 
-	boofer[BUFFER_SIZE] = '\0';
+	int i = -1;
+	// rellenamos el boofer de escapes
+	while (++i <= BUFFER_SIZE)
+		boofer[i] = '\0';
+
 	if (suboofer == NULL)
 		suboofer = ft_strdup("");
 		
-	while (!ft_strchr(boofer, '\n'))
+	while (!ft_strchr(suboofer, '\n'))
 	{
 		if ((bytesread = read(fd, boofer, BUFFER_SIZE)) <= 0)
-			break;
+		{
+			free (boofer);
+			if (bytesread == 0)
+				break ;
+			return (NULL);
+		}
 		boofer[bytesread] ='\0';
-		// hadles the freeing of the allocatd boofer memory.
+		tmp = suboofer;
 		suboofer = ft_strjoin(suboofer, boofer);
+		free (tmp);
 	}
-	char* devolusao = retrieve_line(suboofer);
-	suboofer = limpiamos(suboofer);
-	return devolusao;
+	devolusao = retrieve_line(suboofer);
+	char *temp = limpiamos(suboofer);
+
+	suboofer = temp;
+	if (*devolusao == '\0')
+		return (NULL);
+	return (devolusao);
 }
 
+/*
+	Liberacion: la string a liberar se reccorre hasta la ultima posición, lo liberado será la longitud de la cadena. 
+*/
 char *limpiamos(char *string)
 {
-    char *devo;
-    int i = 0;
-    
-	 if (string[i] == '\0') {
-        devo = ft_strdup("");
-		
-    while (string[i] != '\n' && string[i] != '\0')
-        i++;
-	// should we change this to a free function?
-    if (string[i] == '\0') {
-        devo = ft_strdup("");
-    } else {
-        devo = ft_strndup(string + i + 1 , ft_strlen(string) - (i + 1));
-    }
-// no estamos liberando la memoria de la variable estática?
-	liberasao(&string);
-    return devo;
-}
+	char	*devo;
+	int		i;
 
+	i = 0;
+	if (string[i] == '\0')
+		return (NULL);
+
+	while (string[i] != '\n' && string[i] != '\0')
+		i++;
+	
+	if (string[i] == '\0')
+		return (liberasao(&string));
+	devo = ft_strndup(string + i + 1 , ft_strlen(string) - (i + 1));
+	liberasao(&string);
+
+	return (devo);
+}
 char *retrieve_line(char *string)
 {	
 	int i;
@@ -67,28 +87,28 @@ char *retrieve_line(char *string)
 	i = 0;
 	char *posicion = ft_strchr(string, '\n');
 	char *a_devolver;
-	
+
 	if (posicion != NULL)
-		a_devolver = malloc((posicion - string) + 1);
+		a_devolver = malloc((posicion - string) + 2);
 	else
-		return (string);
+		return (ft_strdup(string));
 	
-	while(i < (posicion - string))
+	while(i < (posicion - string) + 1)
 	{
 		a_devolver[i] = string[i];
 		i ++;
 	}
-	// a_devolver se libera dejando result con memoria alocada dinamicamente sin liberar.
 	a_devolver[i] = '\0';
 	char *result = ft_strdup(a_devolver);
-	free(a_devolver);
-	return result;
+
+	free (a_devolver);
+	return (result);
 }
-// we need to pass the pointer itsel, the parameter will be a pointer of variable that points 
-// to the pointer passed.
-char *liberasao(char **aliberar)
+
+// liberasao libera memoria alocada a strings o cadenas de caracteres.
+char* liberasao(char **aliberar)
 {
 	free(*aliberar);
 	*aliberar = NULL;
-	return aliberar;
+	return (NULL);
 }

@@ -12,23 +12,23 @@
 
 #include "get_next_line.h"
 
+
+
+// arreglar los leaks still reachable. 
 int main (void)
 {
 	int fd = open("oruebafile.txt", O_RDONLY);
-	char *escribir = get_next_line(fd);
-	char *escribir1 = get_next_line(fd);
-	char *escribir2 = get_next_line(fd);
-	char *escribir3 = get_next_line(fd);
-	char *escribir4 = get_next_line(fd);
-	char *escribir5 = get_next_line(fd);
-	
-	printf("La cadena leida por el feed es: %s \n", escribir);
-	printf("La cadena leida por el feed es: %s\n", escribir1);
-	printf("La cadena leida por el feed es: %s\n", escribir2);
-	printf("La cadena leida por el feed es: %s\n", escribir3);
-	printf("La cadena leida por el feed es: %s\n", escribir4);
-	printf("La cadena leida por el feed es: %s\n", escribir5);
-	
-	
+	char *escribir;
+
+	escribir = get_next_line(fd);
+	while (escribir)
+	{
+		printf("%s", escribir);
+		free(escribir);
+		escribir = get_next_line(fd);
+	}
+	if (escribir)
+		free (escribir);
+	close(fd);
 	return (0);
 }

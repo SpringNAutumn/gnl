@@ -14,10 +14,10 @@
 
 
 // implemented functions handle the dynamic memory allocation if there is any. 
-char *ft_strchr(const char *s, int c)
+char *ft_strchr( char *s, int c)
 {
 	if (!s)
-		return NULL;
+		return (NULL);
 		
 	while(*s)
 	{
@@ -25,7 +25,7 @@ char *ft_strchr(const char *s, int c)
 			return s;
 		s++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 char *ft_strjoin(char *s1, char *s2)
@@ -37,7 +37,7 @@ char *ft_strjoin(char *s1, char *s2)
 
 	o = 0;
 	i = 0;
-	char *s3 = malloc(sizeof(char) * (strlen(s1) + strlen(s2) + 1));
+	char *s3 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!s3)
 	 	return (NULL);
 
@@ -58,19 +58,20 @@ char *ft_strjoin(char *s1, char *s2)
 
 size_t ft_strlen(char *s)
 {
-	if( s == NULL)
-		return 0;
-	int i = 0;
-	
+	if(s == NULL)
+		return (0);
+	int i;
+
+	i = 0;
 	while(*s)
 	{
 		i++;
 		s++;
 	}
-	return i;
+	return (i);
 }
 // El substr se puede utilizar en vez del strndup
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	int		i;
 	size_t	o;
@@ -100,7 +101,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 // Todo implement strdup.
-char *ft_strdup(char const *s1)
+char *ft_strdup(char *s1)
 {
 	int i = 0;
 	char *s2 = malloc(ft_strlen(s1) + 1 * sizeof(char));
@@ -118,14 +119,14 @@ char *ft_strdup(char const *s1)
 }
 
 // copies at most n characters of the string s1 always null terminating
-char *ft_strndup(char const *s1, size_t n)
+char *ft_strndup(char *s1, size_t n)
 {
 	int i = 0;
 
 	char *s2 = malloc(n + 1 * sizeof(char));
 	
 	// si la alocacion de memoria falla. retornamos null.
-	if (!s2)
+	if (!s2 )
 		return NULL;
 
 	while (i < n && s1)
