@@ -6,7 +6,7 @@
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/06/17 15:29:13 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/06/17 17:27:13 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*suboofer;
+	static char	*suboofer[1024];
 	char		*boofer;
 	int			bytesread;
 	char		*line;
@@ -26,16 +26,16 @@ char	*get_next_line(int fd)
 	if (!boofer)
 		return (NULL);
 	boofer[BUFFER_SIZE] = '\0';
-	if (suboofer == NULL)
-		suboofer = ft_strdup("");
-	suboofer = readfile(suboofer, boofer, fd);
+	if (suboofer[fd] == NULL)
+		suboofer[fd] = ft_strdup("");
+	suboofer[fd] = readfile(suboofer[fd], boofer, fd);
 	free(boofer);
-	line = retrieve_line(suboofer);
-	suboofer = freeing(suboofer);
+	line = retrieve_line(suboofer[fd]);
+	suboofer[fd] = freeing(suboofer[fd]);
 	if (*line == '\0')
 	{
 		free (line);
-		return (liberating(&suboofer));
+		return (liberating(&(suboofer[fd])));
 	}
 	return (line);
 }
