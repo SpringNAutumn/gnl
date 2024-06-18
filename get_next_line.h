@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
-size_t	ft_strlen(char *s);
+int     ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 char	*retrieve_line(char *string);
@@ -31,7 +31,7 @@ char	*liberating(char **aliberar);
 char	*freeing(char *string);
 char	*ft_strdup(char *s1);
 char	*get_next_line(int fd);
-char	*ft_strndup(char *s1, size_t n);
+char	*ft_strndup(char *s1, int n);
 char	*readfile(char *suboofer, char *boofer, int fd);
 
 #endif

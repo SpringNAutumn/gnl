@@ -16,10 +16,7 @@ char	*get_next_line(int fd)
 {
 	static char	*suboofer[1024];
 	char		*boofer;
-	int			bytesread;
 	char		*line;
-	char		*tmp;
-
 	if (BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX || fd < 0)
 		return (NULL);
 	boofer = malloc(BUFFER_SIZE + 1);
@@ -65,6 +62,7 @@ char	*retrieve_line(char *string)
 
 	i = 0;
 	posicion = ft_strchr(string, '\n');
+
 	if (posicion != NULL)
 		a_devolver = malloc((posicion - string) + 2);
 	else
@@ -97,7 +95,7 @@ char	*readfile(char *suboofer, char *boofer, int fd)
 		{
 			if (bytesread == 0)
 				break ;
-			free (boofer);
+			//free (boofer);
 			return (NULL);
 		}
 		boofer[bytesread] = '\0';

@@ -53,7 +53,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (s3);
 }
 
-size_t	ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ char	*ft_strdup(char *s1)
 	return (s2);
 }
 
-char	*ft_strndup(char *s1, size_t n)
+char	*ft_strndup(char *s1, int n)
 {
 	int		i;
 	char	*s2;
