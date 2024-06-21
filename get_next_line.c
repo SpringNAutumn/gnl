@@ -16,9 +16,7 @@ char	*get_next_line(int fd)
 {
 	static char	*suboofer;
 	char		*boofer;
-	int			bytesread;
 	char		*line;
-	char		*tmp;
 
 	if (BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX || fd < 0)
 		return (NULL);
@@ -27,17 +25,23 @@ char	*get_next_line(int fd)
 		return (NULL);
 	boofer[BUFFER_SIZE] = '\0';
 	if (suboofer == NULL)
+	{
 		suboofer = ft_strdup("");
+		
+		//printf("el suboofer nuloo: %s", suboofer);
+	}
 	suboofer = readfile(suboofer, boofer, fd);
 	free(boofer);
 	line = retrieve_line(suboofer);
 	suboofer = freeing(suboofer);
+	if (!line)
+		return (NULL);
 	if (*line == '\0')
 	{
 		free (line);
 		return (liberating(&(suboofer)));
 	}
-	printf("%s", line);
+	//printf("%s", line);
 	return (line);
 }
 
@@ -47,8 +51,10 @@ char	*freeing(char *string)
 	int		i;
 
 	i = 0;
-	if (string[i] == '\0')
+
+	if (string == NULL)
 		return (liberating(&string));
+	
 	while (string[i] != '\n' && string[i] != '\0')
 		i++;
 	if (string[i] == '\0')
@@ -71,7 +77,7 @@ char	*retrieve_line(char *string)
 		a_devolver = malloc((posicion - string) + 2);
 	else
 	{
-		printf("%s", string);
+		//printf("%s", "entramos en el printf");
 		return (ft_strdup(string));
 	
 	}
@@ -105,7 +111,7 @@ char	*readfile(char *suboofer, char *boofer, int fd)
 		{
 			if (bytesread == 0)
 				break ;
-			free (boofer);
+			//free (boofer);
 			return (NULL);
 		}
 		boofer[bytesread] = '\0';

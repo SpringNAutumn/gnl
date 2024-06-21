@@ -74,6 +74,8 @@ char	*ft_strdup(char *s1)
 	char	*s2;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	s2 = malloc(ft_strlen(s1) + 1 * sizeof(char));
 	if (!s2)
 		return (NULL);
@@ -86,12 +88,14 @@ char	*ft_strdup(char *s1)
 	return (s2);
 }
 
-char	*ft_strndup(char *s1, size_t n)
+char	*ft_strndup(char *s1, int n)
 {
 	int		i;
 	char	*s2;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	s2 = malloc(n + 1 * sizeof(char));
 	if (!s2)
 		return (NULL);

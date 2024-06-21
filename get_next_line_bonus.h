@@ -20,7 +20,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 
 size_t	ft_strlen(char *s);
@@ -31,7 +31,7 @@ char	*liberating(char **aliberar);
 char	*freeing(char *string);
 char	*ft_strdup(char *s1);
 char	*get_next_line(int fd);
-char	*ft_strndup(char *s1, size_t n);
+char	*ft_strndup(char *s1, int n);
 char	*readfile(char *suboofer, char *boofer, int fd);
 
 #endif

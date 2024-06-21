@@ -16,9 +16,7 @@ char	*get_next_line(int fd)
 {
 	static char	*suboofer[1024];
 	char		*boofer;
-	int			bytesread;
 	char		*line;
-	char		*tmp;
 
 	if (BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX || fd < 0)
 		return (NULL);
@@ -30,8 +28,11 @@ char	*get_next_line(int fd)
 		suboofer[fd] = ft_strdup("");
 	suboofer[fd] = readfile(suboofer[fd], boofer, fd);
 	free(boofer);
+	// printf(" imprimiendo %s", suboofer[fd]);
 	line = retrieve_line(suboofer[fd]);
 	suboofer[fd] = freeing(suboofer[fd]);
+	if (!line)
+		return (NULL);
 	if (*line == '\0')
 	{
 		free (line);
@@ -46,6 +47,9 @@ char	*freeing(char *string)
 	int		i;
 
 	i = 0;
+
+	if (!string)
+		return (NULL);
 	if (string[i] == '\0')
 		return (liberating(&string));
 	while (string[i] != '\n' && string[i] != '\0')
@@ -97,7 +101,6 @@ char	*readfile(char *suboofer, char *boofer, int fd)
 		{
 			if (bytesread == 0)
 				break ;
-			free (boofer);
 			return (NULL);
 		}
 		boofer[bytesread] = '\0';
