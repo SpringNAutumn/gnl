@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/06/17 14:38:17 by gmarin-m         ###   ########.fr       */
+/*   Created: 2024/06/18 12:20:12 by gmarin-m          #+#    #+#             */
+/*   Updated: 2024/06/18 12:30:33 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(char *s, int c)
 {
@@ -103,3 +103,6 @@ char	*ft_strndup(char *s1, size_t n)
 	s2[n] = '\0';
 	return (s2);
 }
+
+
+
