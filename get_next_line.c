@@ -12,38 +12,53 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	static char	*suboofer;
-	char		*boofer;
-	char		*line;
+    static char *suboofer;
+    char *boofer;
+    char *line;
+	char *temp_suboofer;
 
-	if (BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX || fd < 0)
-		return (NULL);
-	boofer = malloc(BUFFER_SIZE + 1);
-	if (!boofer)
-		return (NULL);
-	boofer[BUFFER_SIZE] = '\0';
-	if (suboofer == NULL)
-	{
-		suboofer = ft_strdup("");
-		
-		//printf("el suboofer nuloo: %s", suboofer);
+    if (BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX || fd < 0)
+        return (NULL);
+    boofer = malloc(BUFFER_SIZE + 1);
+    if (!boofer)
+        return (NULL);
+    boofer[BUFFER_SIZE] = '\0';
+    if (suboofer == NULL)
+    {
+        suboofer = ft_strdup("");
+        if (!suboofer)
+        {
+            free(boofer);
+            return (NULL);
+        }
 	}
-	suboofer = readfile(suboofer, boofer, fd);
-	free(boofer);
-	line = retrieve_line(suboofer);
-	suboofer = freeing(suboofer);
-	if (!line)
-		return (NULL);
-	if (*line == '\0')
-	{
-		free (line);
-		return (liberating(&(suboofer)));
-	}
-	//printf("%s", line);
-	return (line);
+    temp_suboofer = readfile(suboofer, boofer, fd);
+    free(boofer);
+
+    if (!temp_suboofer)
+    {
+        free(suboofer);
+        suboofer = NULL;
+        return (NULL);
+    }
+
+    suboofer = temp_suboofer;
+    line = retrieve_line(suboofer);
+    suboofer = freeing(suboofer);
+
+    if (!line)
+        return (NULL);
+
+    if (*line == '\0')
+    {
+        free(line);
+        return (liberating(&suboofer));
+    }
+    return (line);
 }
+
 
 char	*freeing(char *string)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 15:52:08 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/06/17 14:38:17 by gmarin-m         ###   ########.fr       */
+/*   Updated: 2024/06/22 21:11:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*ft_strdup(char *s1)
 	if (!s1)
 		return (NULL);
 	i = 0;
-	//printf("size of s1 = %d" , (int)ft_strlen(s1));
 	s2 = malloc((ft_strlen(s1) + 1) * sizeof(char));
 	if (!s2)
 		return (NULL);
