@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarin-m <gmarin-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 12:26:45 by gmarin-m          #+#    #+#             */
-/*   Updated: 2024/06/18 12:29:58 by gmarin-m         ###   ########.fr       */
+/*   Created: 2024/01/02 18:03:50 by gmarin-m          #+#    #+#             */
+/*   Updated: 2024/06/18 16:41:38 by gmarin-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
 	static char	*suboofer[1024];
 	char		*boofer;
 	char		*line;
+	char		*temp_suboofer;
 
 	if (BUFFER_SIZE < 0 || BUFFER_SIZE > INT_MAX || fd < 0)
 		return (NULL);
@@ -26,18 +27,17 @@ char	*get_next_line(int fd)
 	boofer[BUFFER_SIZE] = '\0';
 	if (suboofer[fd] == NULL)
 		suboofer[fd] = ft_strdup("");
-	suboofer[fd] = readfile(suboofer[fd], boofer, fd);
+	temp_suboofer = readfile(suboofer[fd], boofer, fd);
 	free(boofer);
-	// printf(" imprimiendo %s", suboofer[fd]);
+	if (!temp_suboofer)
+		liberating(&(suboofer[fd]));
+	suboofer[fd] = temp_suboofer;
 	line = retrieve_line(suboofer[fd]);
 	suboofer[fd] = freeing(suboofer[fd]);
 	if (!line)
 		return (NULL);
 	if (*line == '\0')
-	{
-		free (line);
-		return (liberating(&(suboofer[fd])));
-	}
+		return (free(line), liberating(&(suboofer[fd])));
 	return (line);
 }
 
@@ -47,10 +47,7 @@ char	*freeing(char *string)
 	int		i;
 
 	i = 0;
-
-	if (!string)
-		return (NULL);
-	if (string[i] == '\0')
+	if (string == NULL)
 		return (liberating(&string));
 	while (string[i] != '\n' && string[i] != '\0')
 		i++;
@@ -63,7 +60,7 @@ char	*freeing(char *string)
 
 char	*retrieve_line(char *string)
 {
-	int		i;
+	int		i ;
 	char	*posicion;
 	char	*a_devolver;
 
@@ -76,7 +73,7 @@ char	*retrieve_line(char *string)
 	while (i < (posicion - string) + 1)
 	{
 		a_devolver[i] = string[i];
-		i ++;
+		i++;
 	}
 	a_devolver[i] = '\0';
 	return (a_devolver);

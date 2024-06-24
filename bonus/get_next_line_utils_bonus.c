@@ -107,6 +107,3 @@ char	*ft_strndup(char *s1, int n)
 	s2[n] = '\0';
 	return (s2);
 }
-
-
-
